@@ -1,0 +1,13 @@
+# User configuration for sysupdate. User must copy this file
+# into @@PREFIX@@/etc/rdnzl/sysupdate.rc in fill in the settings.
+
+# The name of the ZFS pool.
+#ZFS_POOL="zrdnzltank"
+
+# Jails are located under this ZFS filesystem
+#JAIL_BASEFS="${ZFS_POOL}/DATA/jails"
+
+# System sources are kept under this ZFS filesystem
+#SRC_BASEFS="${ZFS_POOL}/DATA/src"
+
+

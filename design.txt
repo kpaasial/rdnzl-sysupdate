@@ -1,0 +1,12 @@
+
+
+Sources (svnlite info)-> SVNREVISION (zfs snapshot,zfs clone)-> BUILDJAIL /usr/src fixed at SVNREVISION.
+
+BUILDJAIL /usr/src (buildworld, buildkernel)-> BUILDJAIL /usr/obj.
+
+BUILDJAIL /usr/src,/usr/obj (installworld, installkernel) OS update on HOST(s).
+
+BUILDJAIL /usr/src,/usr/obj (installworld)-> OS update on BUILDJAIL.
+
+BUILDJAIL /usr/src,/usr/obj (installworld)-> OS install on PORTSJAIL(s).
+
