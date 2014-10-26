@@ -5,7 +5,7 @@
 # also go to $PREFIX/share/rdnzl-sysupdate.
 # Sample .rc file goes to $PREFIX/etc.
 
-PREFIX=/opt
+PREFIX?=/opt
 
 SCRIPTS= rdnzl-sysupdate 
 
