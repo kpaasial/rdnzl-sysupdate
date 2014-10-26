@@ -1,12 +1,5 @@
 #!/bin/sh
 
-# TODO: Create a driver program that does the common mundane
-# tasks like reading in the configuration and includes and then
-# passes control to the script that handles the real request.
-# For example: 'rdnzl-sysupdate new-sources buildreleng101amd64'
-# Would call $PREFIX/share/rdnzl/new-sources.sh with the environment
-# set and with argument buildreleng101amd64.
-
 # Script for bootstrapping a buildjail
 
 # Creates a ZFS filesystem for the jail. Optionally downloads and installs a
@@ -19,11 +12,11 @@
 # skeleton entry for it.
 
 
-SHARE_RDNZL="${SYSUPDATEPREFIX}/share/rdnzl-sysupdate"
+PREFIX_SHARE="${SYSUPDATEPREFIX}/share"
 
-. "${SHARE_RDNZL}/include/zfs-functions.sh"
-. "${SHARE_RDNZL}/include/svn-functions.sh"
-. "${SHARE_RDNZL}/include/sysupdate-common.sh"
+. "${PREFIX_SHARE}/rdnzl/zfs-functions.sh"
+. "${PREFIX_SHARE}/rdnzl/svn-functions.sh"
+. "${PREFIX_SHARE}/rdnzl-sysupdate/sysupdate-common.sh"
 . "${SYSUPDATEPREFIX}/etc/rdnzl-sysupdate.rc"
 
 usage()
