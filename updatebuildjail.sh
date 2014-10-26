@@ -14,15 +14,14 @@ usage()
     exit 0   
 }
 
-SHARE_RDNZL="${SYSUPDATEPREFIX}/share/rdnzl"
+PREFIX_SHARE="${SYSUPDATEPREFIX}/share"
+SHARE_RDNZL="${PREFIX_SHARE}/rdnzl"
 
-. "${SHARE_RDNZL}/zfs-functions.sh"
-. "${SHARE_RDNZL}/svn-functions.sh"
 . "${SHARE_RDNZL}/jail-functions.sh"
-. "${SHARE_RDNZL}/rdznl-sysupdate/sysupdate-common.sh"
-. "${PREFIX}/etc/rdnzl-sysupdate.rc"
-
-
+. "${SHARE_RDNZL}/svn-functions.sh"
+. "${SHARE_RDNZL}/zfs-functions.sh"
+. "${PREFIX_SHARE}/rdnzl-sysupdate/sysupdate-common.sh"
+. "${SYSUPDATEPREFIX}/etc/rdnzl-sysupdate.rc"
 
 # SVNBRANCH is a fixed property and can not be changed.
 # Only SVNREVISION gets updated

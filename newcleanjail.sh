@@ -19,13 +19,15 @@
 # TODO: This is not really part of the sysupdate suite. It probably
 # belongs to ../ports.
 
-SHARE_RDNZL="${SYSUPDATEPREFIX}/share/rdnzl-sysupdate"
+PREFIX_SHARE="${SYSUPDATEPREFIX}/share"
+SHARE_RDNZL="${PREFIX_SHARE}/rdnzl"
 
-. "${SHARE_RDNZL}/include/zfs-functions.sh"
-. "${SHARE_RDNZL}/include/svn-functions.sh"
-. "${SHARE_RDNZL}/include/jail-functions.sh"
-. "${SHARE_RDNZL}/include/sysupdate-common.sh"
-. "${SYSUPDATEPREFIX}/etc/rdnzl/sysupdate.rc"
+. "${SHARE_RDNZL}/jail-functions.sh"
+. "${SHARE_RDNZL}/svn-functions.sh"
+. "${SHARE_RDNZL}/zfs-functions.sh"
+. "${PREFIX_SHARE}/rdnzl-sysupdate/sysupdate-common.sh"
+. "${SYSUPDATEPREFIX}/etc/rdnzl-sysupdate.rc"
+
 
 usage()
 {
@@ -149,6 +151,8 @@ PORTSJAIL_MNT=$(rdnzl_zfs_get_property_value "${PORTSJAIL_FS}" "mountpoint")
 rdnzl_in_jail "${BUILDJAIL}" \
     /usr/bin/make -C /usr/src installworld DESTDIR=/mnt DB_FROM_SRC=1
 
+# Note: There is no update for the created jails so mergemaster(8) is
+# never used.
 rdnzl_in_jail "${BUILDJAIL}" \
     /usr/bin/make -C /usr/src distrib-dirs DESTDIR=/mnt DB_FROM_SRC=1
 
@@ -179,5 +183,5 @@ PORTSJAILSRC_MNT="${PORTSJAIL_MNT}/usr/src"
 /bin/cp /etc/localtime  "${PORTSJAIL_MNT}/etc/localtime"
 
 # TODO: Maybe some more extra set up is needed, not known at the moment.
-
+# TODO: The extra setup could be done with hooks that are configurable.
 

@@ -35,13 +35,13 @@
 
 # Include common functions and settings
 
-SHARE_RDNZL="${SYSUPDATEPREFIX}/share/rdnzl"
+PREFIX_SHARE="${SYSUPDATEPREFIX}/share"
+SHARE_RDNZL="${PREFIX_SHARE}/rdnzl"
 
 . "${SHARE_RDNZL}/zfs-functions.sh"
 . "${SHARE_RDNZL}/svn-functions.sh"
-. "${SYSUPDATEPREFIX}/share/rdnzl-sysupdate/sysupdate-common.sh"
+. "${PREFIX_SHARE}/rdnzl-sysupdate/sysupdate-common.sh"
 . "${SYSUPDATEPREFIX}/etc/rdnzl-sysupdate.rc"
-
 
 usage()
 {
@@ -49,23 +49,6 @@ usage()
     exit 0
 }
 
-# Defaults for settings.
-#INSTALL_MODE="kernel"
-
-# Parse command line arguments to override the defaults.
-# TODO: Add a -n flag for testrun option to see what would
-# be done.
-#while getopts "hW" o
-#do
-#    case "$o" in
-#    h)  usage;;
-#    W)  INSTALL_MODE="world";;
-#    *)  usage;;
-#    esac
-
-#done
-
-#shift $((OPTIND-1))
 
 : ${BUILDJAIL:="$1"}
 
@@ -146,9 +129,6 @@ echo "OBJ_SVNREVISION: ${OBJ_SVNREVISION}"
 echo "OBJ_SVNBRANCH: ${OBJ_SVNBRANCH}"
 
 
-# Note: Installing sources/objects with the same SVNBRANCH/SVNREVISION is
-# ok because sometimes it's necessary to redo a build using the same version.
-
 # Mount /usr/src and /usr/obj if needed
 if ! /sbin/mount | grep -q 'on /usr/src'; then
     /sbin/mount_nullfs "${BUILDJAILSRC_MNT}" /usr/src
@@ -158,7 +138,6 @@ if ! /sbin/mount | grep -q 'on /usr/obj'; then
     /sbin/mount_nullfs "${BUILDJAILOBJ_MNT}" /usr/obj
 fi   
 
-#if test "${INSTALL_MODE}" = "kernel"; then 
 echo "Going to perform 'make installkernel' in /usr/src to install the new kernel."
 
 # TODO: Find a way to revert /boot/kernel* to initial state
@@ -180,7 +159,6 @@ echo "Going to perform 'make installkernel' in /usr/src to install the new kerne
     
 
 # Run the installworld sequence
-#/usr/sbin/mergemaster -p
 # TODO: Check for errors in each step
 
 /usr/bin/make -C /usr/src installworld
@@ -195,6 +173,5 @@ echo "Going to perform 'make installkernel' in /usr/src to install the new kerne
 "${ZFS_CMD}" set "${SVNBRANCHPROP}=${OBJ_SVNBRANCH}" "${ROOT_DATASET}"
 
 echo "Installed world from build that was done with branch ${OBJ_SVNBRANCH} and SVN revision ${OBJ_SVNREVISION}"
-
 
 exit 0

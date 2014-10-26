@@ -26,11 +26,11 @@
 # TODO: Require root privileges, none of this will work as a normal user.
 # Same goes for other scripts.
 
-# TODO: Use more variables to make these shorter and less error-prone. 
 PREFIX_SHARE="${SYSUPDATEPREFIX}/share"
+SHARE_RDNZL="${PREFIX_SHARE}/rdnzl"
 
-. "${PREFIX_SHARE}/rdnzl/zfs-functions.sh"
-. "${PREFIX_SHARE}/rdnzl/svn-functions.sh"
+. "${SHARE_RDNZL}/zfs-functions.sh"
+. "${SHARE_RDNZL}/svn-functions.sh"
 . "${PREFIX_SHARE}/rdnzl-sysupdate/sysupdate-common.sh"
 . "${SYSUPDATEPREFIX}/etc/rdnzl-sysupdate.rc"
 
